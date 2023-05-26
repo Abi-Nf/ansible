@@ -16,4 +16,6 @@ Then, execute the command below to start configuration
 ./automate.sh test.config
 ```
 
+> The execution file (index.yaml) may take a long time
+
 To make sure the configuration is done successfuly, the final message is : **Configuration done !**
