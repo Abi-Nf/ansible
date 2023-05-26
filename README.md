@@ -13,7 +13,7 @@ Then, execute the command below to start configuration
 # automate [File] 
 # So, the file is : test.config
 
-automate test.config
+./automate.sh test.config
 ```
 
 To make sure the configuration is done successfuly, the final message is : **Configuration done !**
