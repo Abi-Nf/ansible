@@ -10,7 +10,7 @@ Create a file like [**test.config**](./test.config) and write something like thi
 Then, execute the command below to start configuration
 
 ```sh
-# automate [File] 
+# ./automate.sh [File] 
 # So, the file is : test.config
 
 ./automate.sh test.config
