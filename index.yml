@@ -1,0 +1,23 @@
+---
+- name: configuring Apache server
+  hosts: localhost
+  tasks:
+    - name: Install Apache if not exist
+      package:
+       name : apache2
+       state: present
+
+    - name: Start Apache
+      service:
+       name: apache2
+       state: started
+
+    - name: The site index file to apache configuration
+      copy:
+        src: /tmp/index.html
+        dest: /var/www/html/
+
+    - name: Restart apache
+      service:
+        name: apache2
+        state: restarted

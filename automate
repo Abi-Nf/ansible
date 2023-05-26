@@ -1,0 +1,4 @@
+#!/bin/sh
+echo Begin automation
+exec python3 index.py $@
+exec ansible-playbook index.yml
