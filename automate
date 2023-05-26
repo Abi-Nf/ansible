@@ -1,0 +1,1 @@
+ansible-playbook config.yml -e "test.config=test.config" --ask-become-pass
