@@ -1,4 +1,1 @@
-#!/bin/sh
-echo Begin automation
-exec python3 index.py $@
-exec ansible-playbook index.yml
+ansible-playbook config.yml -e "test.config=test.config" --ask-become-pass

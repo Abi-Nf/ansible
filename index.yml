@@ -1,23 +1,44 @@
 ---
-- name: configuring Apache server
+- name: Configuration Apache2
   hosts: localhost
+  become: yes
+  become_method: sudo
+  vars_files:
+    - test.config
+
   tasks:
-    - name: Install Apache if not exist
-      package:
-       name : apache2
-       state: present
+    - name: Install Apache2
+      apt:
+        name: apache2
+        state: present
 
-    - name: Start Apache
-      service:
-       name: apache2
-       state: started
+    - name: Create website directory
+      file:
+        path: "{{ item.directory }}"
+        state: directory
+        mode: '0755'
+      with_items: "{{ websites }}"
 
-    - name: The site index file to apache configuration
+    - name: Copy website files
       copy:
-        src: /tmp/index.html
-        dest: /var/www/html/
+        src: "{{ item.directory }}"
+        dest: "{{ item.directory }}/{{ item.file }}"
+      with_items: "{{ websites }}"
 
-    - name: Restart apache
+    - name: Create Apache2 virtual host config
+      template:
+        src: virtualhost.conf.j2
+        dest: "/etc/apache2/sites-available/{{ item.domain }}.conf"
+      with_items: "{{ websites }}"
+
+    - name: Enable Apache2 virtual host
+      command: a2ensite "{{ item.domain }}.conf"
+      with_items: "{{ websites }}"
+      notify:
+        - Restart Apache2
+
+  handlers:
+    - name: Restart Apache2
       service:
         name: apache2
         state: restarted
