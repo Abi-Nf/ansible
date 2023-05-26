@@ -5,7 +5,7 @@ Automate apache2 server with Ansible
 ## Configuration
 
 First create a file with all domains you want like this example.
-Create a file like [**test.config**](./test.config) and write something like this in
+Create a file like [**test.config**](./test.config)
 
 Then, execute the command below to start configuration
 
